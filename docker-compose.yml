@@ -1,0 +1,20 @@
+---
+version: "2"
+services:
+  palworld:
+    container_name: palworld
+    build: .
+    image: palworld
+    tty: true
+    cpu_count: 4
+    cpuset: 0-3
+    mem_limit: 30G
+    mem_reservation: 16G
+    restart: unless-stopped
+    network_mode: bridge
+    ports:
+      - 8211:8211/udp
+      - 27015:27015/udp
+    volumes:
+      - ./saves:/opt/palworld/Pal/Saved
+      - ./PalWorldSettings.ini:/opt/palworld/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini:ro
